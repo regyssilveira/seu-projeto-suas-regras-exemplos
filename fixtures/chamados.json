@@ -1,0 +1,23 @@
+[
+  {
+    "id": "CH-001",
+    "titulo": "Impressora sem papel",
+    "descricao": "Dados fictícios.",
+    "status": "aberto",
+    "prioridade": "alta"
+  },
+  {
+    "id": "CH-002",
+    "titulo": "Acesso restabelecido",
+    "descricao": "Dados fictícios.",
+    "status": "concluido",
+    "prioridade": "normal"
+  },
+  {
+    "id": "CH-003",
+    "titulo": "Atualizar cadastro",
+    "descricao": "Dados fictícios.",
+    "status": "aberto",
+    "prioridade": "normal"
+  }
+]

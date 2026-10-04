@@ -1,0 +1,30 @@
+Data: 2026-10-04
+Ambiente: Windows; PowerShell; execução local assistida por Codex
+Escopo: lógica JavaScript e defeitos semeados; não é comparação entre agentes
+Node: v25.4.0
+Git: git version 2.56.0.windows.1
+Comando: node --test testes/*.test.cjs
+✔ lista inicial ordenada (1.1837ms)
+✔ status isolado (0.1266ms)
+✔ prioridade isolada (0.0926ms)
+✔ filtros combinados por E (0.6205ms)
+✔ combinação sem resultado (0.1382ms)
+✔ status inválido em coleção vazia (0.2353ms)
+✔ prioridade inválida (0.0908ms)
+✔ título vazio ou espaços sem mutação (0.2218ms)
+✔ apara espaços (0.0911ms)
+✔ cria id e valores padrão (0.1877ms)
+✔ atualiza (0.1186ms)
+✔ atualização inválida é atômica (0.138ms)
+✔ id inexistente (0.0683ms)
+✔ retornos não expõem estado (0.1187ms)
+✔ defeito de título e solução (0.6512ms)
+✔ defeito OU e solução E (0.4702ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86.5373
