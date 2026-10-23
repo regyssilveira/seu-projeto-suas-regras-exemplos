@@ -1,0 +1,623 @@
+{
+  "date": "2026-10-23",
+  "scope": "Verificadores locais de lógica na cópia indicada; sem ensaio de agentes ou compilação Delphi.",
+  "node": "v25.4.0",
+  "regressionSuite": {
+    "command": "node --test testes/*.test.cjs",
+    "exitCode": 0,
+    "tests": 41,
+    "passed": 41,
+    "failed": 0,
+    "observed": "Execução completa nesta rodada; 19 testes anteriores e 22 testes do verificador. Os testes novos criam e avaliam cópias temporárias corretas e defeituosas fora do repositório."
+  },
+  "directChecks": [
+    {
+      "command": [
+        "node",
+        "verificadores/verificar-exercicio.cjs",
+        "LAB-01",
+        "laboratorios/estados/titulo-inicial.cjs",
+        "--json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "result": {
+        "laboratorio": "LAB-01",
+        "alvo": "D:\\Livros\\seu-projeto-suas-regras-exemplos\\laboratorios\\estados\\titulo-inicial.cjs",
+        "sha256": "e54502c46fbd2d22d0c8861855310ab1f9d6f9d5da6db28294ba01d35aac441f",
+        "limite": "Avalia normalização de título; não comprova criação sem mutação. Use LAB-01-CRIACAO para essa camada. Tabulações e outros espaços ficam fora do LAB-01.",
+        "total": 9,
+        "aprovados": 6,
+        "reprovados": 3,
+        "resultados": [
+          {
+            "nome": "Rejeita \"\"",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita \"   \"",
+            "aprovado": false,
+            "erro": "Missing expected exception."
+          },
+          {
+            "nome": "Rejeita undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita null",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita 42",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita {}",
+            "aprovado": true
+          },
+          {
+            "nome": "Normaliza \"Ajustar tela\"",
+            "aprovado": true
+          },
+          {
+            "nome": "Normaliza \"  Ajustar tela  \"",
+            "aprovado": false,
+            "erro": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '  Ajustar tela  '\n- 'Ajustar tela'\n"
+          },
+          {
+            "nome": "Normaliza \"  Ajustar  tela  \"",
+            "aprovado": false,
+            "erro": "Expected values to be strictly equal:\n+ actual - expected\n\n+ '  Ajustar  tela  '\n- 'Ajustar  tela'\n"
+          }
+        ]
+      }
+    },
+    {
+      "command": [
+        "node",
+        "verificadores/verificar-exercicio.cjs",
+        "LAB-12",
+        "laboratorios/estados/listagem-inicial.cjs",
+        "--json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "result": {
+        "laboratorio": "LAB-12",
+        "alvo": "D:\\Livros\\seu-projeto-suas-regras-exemplos\\laboratorios\\estados\\listagem-inicial.cjs",
+        "sha256": "b4e43b70cc8d79db368a6954c05dbe65f8a8c09dd55c75851e86f5ba042c6a06",
+        "limite": "Avalia a função de listagem do LAB-12. Não avalia controle de tela ou filtragem por prioridade.",
+        "total": 18,
+        "aprovados": 7,
+        "reprovados": 11,
+        "resultados": [
+          {
+            "nome": "Sem segundo argumento preserva todos os registros",
+            "aprovado": true
+          },
+          {
+            "nome": "Objeto vazio preserva todos os registros",
+            "aprovado": true
+          },
+          {
+            "nome": "Status undefined equivale a filtro omitido",
+            "aprovado": true
+          },
+          {
+            "nome": "Status aberto: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n      id: 'CH-001',\n      prioridade: 'alta',\n...\n      descricao: 'Dados fictícios.',\n+     id: 'CH-002',\n+     prioridade: 'normal',\n+     status: 'concluido',\n+     titulo: 'Acesso restabelecido'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n      id: 'CH-003',\n      prioridade: 'normal',\n      status: 'aberto',\n      titulo: 'Atualizar cadastro'\n    }\n"
+          },
+          {
+            "nome": "Status aberto em coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Status concluido: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n+     id: 'CH-001',\n+     prioridade: 'alta',\n+     status: 'aberto',\n+     titulo: 'Impressora sem papel'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n      id: 'CH-002',\n      prioridade: 'normal',\n      status: 'concluido',\n      titulo: 'Acesso restabelecido'\n    },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n+     prioridade: 'normal',\n+     status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n+   }\n  ]\n"
+          },
+          {
+            "nome": "Status concluido em coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Status em-andamento: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ [\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-001',\n+     prioridade: 'alta',\n+     status: 'aberto',\n+     titulo: 'Impressora sem papel'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-002',\n+     prioridade: 'normal',\n+     status: 'concluido',\n+     titulo: 'Acesso restabelecido'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n+     prioridade: 'normal',\n+     status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n+   }\n+ ]\n- []\n"
+          },
+          {
+            "nome": "Status em-andamento em coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Coleção vazia sem filtro",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status \"cancelado\"; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status \"cancelado\"; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status \"\"; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status \"\"; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status null; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status null; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status 0; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status 0; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          }
+        ]
+      }
+    },
+    {
+      "command": [
+        "node",
+        "verificadores/verificar-exercicio.cjs",
+        "LAB-13",
+        "laboratorios/estados/filtro-com-bug.cjs",
+        "--json"
+      ],
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "result": {
+        "laboratorio": "LAB-13",
+        "alvo": "D:\\Livros\\seu-projeto-suas-regras-exemplos\\laboratorios\\estados\\filtro-com-bug.cjs",
+        "sha256": "f8b482844d6f23efb138a36fde95d2e87eb24eac4edc047485da18004d50a5d2",
+        "limite": "Avalia o contrato de filtros do LAB-13, com argumentos separados. Não mede qualidade da refatoração, controle visual ou ativação de skills.",
+        "total": 46,
+        "aprovados": 20,
+        "reprovados": 26,
+        "resultados": [
+          {
+            "nome": "Status omitido, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ []\n- [\n-   {\n-     descricao: 'Dados fictícios.',\n-     id: 'CH-001',\n-     prioridade: 'alta',\n-     status: 'aberto',\n-     titulo: 'Impressora sem papel'\n-   },\n-   {\n-     descricao: 'Dados fictícios.',\n-     id: 'CH-002',\n-     prioridade: 'normal',\n-     status: 'concluido',\n-     titulo: 'Acesso restabelecido'\n-   },\n-   {\n-     descricao: 'Dados fictícios.',\n-     id: 'CH-003',\n-     prioridade: 'normal',\n-     status: 'aberto',\n-     titulo: 'Atualizar cadastro'\n-   }\n- ]\n"
+          },
+          {
+            "nome": "Status omitido, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status omitido, prioridade normal: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n-     id: 'CH-002',\n      prioridade: 'normal',\n+     status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n-     status: 'concluido',\n-     titulo: 'Acesso restabelecido'\n    },\n    {\n      descricao: 'Dados fictícios.',\n+     id: 'CH-002',\n-     id: 'CH-003',\n      prioridade: 'normal',\n+     status: 'concluido',\n+     titulo: 'Acesso restabelecido'\n-     status: 'aberto',\n-     titulo: 'Atualizar cadastro'\n    }\n  ]\n"
+          },
+          {
+            "nome": "Status omitido, prioridade alta: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "A saída expõe os registros de entrada; retorne cópias.\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n      id: 'CH-003',\n      prioridade: 'normal',\n...\n      status: 'aberto',\n+     titulo: 'Alterado apenas na saída'\n-     titulo: 'Impressora sem papel'\n    },\n    {\n      descricao: 'Dados fictícios.',\n      id: 'CH-002',\n      prioridade: 'normal',\n"
+          },
+          {
+            "nome": "Status aberto, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n+     prioridade: 'normal',\n-     id: 'CH-001',\n-     prioridade: 'alta',\n      status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n-     titulo: 'Impressora sem papel'\n    },\n    {\n      descricao: 'Dados fictícios.',\n+     id: 'CH-001',\n+     prioridade: 'alta',\n-     id: 'CH-003',\n-     prioridade: 'normal',\n      status: 'aberto',\n+     titulo: 'Impressora sem papel'\n-     titulo: 'Atualizar cadastro'\n    }\n  ]\n"
+          },
+          {
+            "nome": "Status aberto, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ [\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n+     prioridade: 'normal',\n+     status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-001',\n+     prioridade: 'alta',\n+     status: 'aberto',\n+     titulo: 'Impressora sem papel'\n+   }\n+ ]\n- []\n"
+          },
+          {
+            "nome": "Status aberto, prioridade normal: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n      id: 'CH-003',\n      prioridade: 'normal',\n...\n    },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-001',\n+     prioridade: 'alta',\n+     status: 'aberto',\n+     titulo: 'Impressora sem papel'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-002',\n+     prioridade: 'normal',\n+     status: 'concluido',\n+     titulo: 'Acesso restabelecido'\n+   }\n  ]\n"
+          },
+          {
+            "nome": "Status aberto, prioridade alta: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n+     prioridade: 'normal',\n+     status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n      id: 'CH-001',\n      prioridade: 'alta',\n      status: 'aberto',\n      titulo: 'Impressora sem papel'\n    }\n"
+          },
+          {
+            "nome": "Status em-andamento, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status em-andamento, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status em-andamento, prioridade normal: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ [\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n+     prioridade: 'normal',\n+     status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-002',\n+     prioridade: 'normal',\n+     status: 'concluido',\n+     titulo: 'Acesso restabelecido'\n+   }\n+ ]\n- []\n"
+          },
+          {
+            "nome": "Status em-andamento, prioridade alta: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ [\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-001',\n+     prioridade: 'alta',\n+     status: 'aberto',\n+     titulo: 'Impressora sem papel'\n+   }\n+ ]\n- []\n"
+          },
+          {
+            "nome": "Status concluido, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "A saída expõe os registros de entrada; retorne cópias.\n+ actual - expected\n... Skipped lines\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n      id: 'CH-003',\n      prioridade: 'normal',\n...\n      status: 'concluido',\n+     titulo: 'Alterado apenas na saída'\n-     titulo: 'Acesso restabelecido'\n    }\n  ]\n"
+          },
+          {
+            "nome": "Status concluido, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ [\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-002',\n+     prioridade: 'normal',\n+     status: 'concluido',\n+     titulo: 'Acesso restabelecido'\n+   }\n+ ]\n- []\n"
+          },
+          {
+            "nome": "Status concluido, prioridade normal: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n  [\n    {\n      descricao: 'Dados fictícios.',\n+     id: 'CH-003',\n+     prioridade: 'normal',\n+     status: 'aberto',\n+     titulo: 'Atualizar cadastro'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n      id: 'CH-002',\n      prioridade: 'normal',\n      status: 'concluido',\n      titulo: 'Acesso restabelecido'\n    }\n"
+          },
+          {
+            "nome": "Status concluido, prioridade alta: seleção, ordem e cópias",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ [\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-001',\n+     prioridade: 'alta',\n+     status: 'aberto',\n+     titulo: 'Impressora sem papel'\n+   },\n+   {\n+     descricao: 'Dados fictícios.',\n+     id: 'CH-002',\n+     prioridade: 'normal',\n+     status: 'concluido',\n+     titulo: 'Acesso restabelecido'\n+   }\n+ ]\n- []\n"
+          },
+          {
+            "nome": "Chamada sem filtros preserva a lista",
+            "aprovado": false,
+            "erro": "Confira os registros completos e a ordem por identificador.\n+ actual - expected\n\n+ []\n- [\n-   {\n-     descricao: 'Dados fictícios.',\n-     id: 'CH-001',\n-     prioridade: 'alta',\n-     status: 'aberto',\n-     titulo: 'Impressora sem papel'\n-   },\n-   {\n-     descricao: 'Dados fictícios.',\n-     id: 'CH-002',\n-     prioridade: 'normal',\n-     status: 'concluido',\n-     titulo: 'Acesso restabelecido'\n-   },\n-   {\n-     descricao: 'Dados fictícios.',\n-     id: 'CH-003',\n-     prioridade: 'normal',\n-     status: 'aberto',\n-     titulo: 'Atualizar cadastro'\n-   }\n- ]\n"
+          },
+          {
+            "nome": "Sem filtros e sem registros",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status cancelado, prioridade undefined; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status cancelado, prioridade undefined; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade urgente; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade urgente; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status , prioridade undefined; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status , prioridade undefined; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade ; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade ; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status null, prioridade undefined; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status null, prioridade undefined; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade null; coleção preenchida",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade null; coleção vazia",
+            "aprovado": false,
+            "erro": "Missing expected exception: Valor desconhecido deve gerar erro."
+          }
+        ]
+      }
+    },
+    {
+      "command": [
+        "node",
+        "verificadores/verificar-exercicio.cjs",
+        "LAB-14",
+        "laboratorios/estados/filtros-duplicados.cjs",
+        "--json"
+      ],
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "result": {
+        "laboratorio": "LAB-14",
+        "alvo": "D:\\Livros\\seu-projeto-suas-regras-exemplos\\laboratorios\\estados\\filtros-duplicados.cjs",
+        "sha256": "091d6114c5a9b4b001f9864657a134f856b9a819ae0afc77db1d8088953a8080",
+        "limite": "Avalia o contrato de filtros do LAB-14, com objeto de filtros. Não mede qualidade da refatoração, controle visual ou ativação de skills.",
+        "total": 46,
+        "aprovados": 46,
+        "reprovados": 0,
+        "resultados": [
+          {
+            "nome": "Status omitido, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status omitido, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status omitido, prioridade normal: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status omitido, prioridade alta: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status aberto, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status aberto, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status aberto, prioridade normal: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status aberto, prioridade alta: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status em-andamento, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status em-andamento, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status em-andamento, prioridade normal: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status em-andamento, prioridade alta: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status concluido, prioridade omitida: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status concluido, prioridade baixa: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status concluido, prioridade normal: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Status concluido, prioridade alta: seleção, ordem e cópias",
+            "aprovado": true
+          },
+          {
+            "nome": "Chamada sem filtros preserva a lista",
+            "aprovado": true
+          },
+          {
+            "nome": "Sem filtros e sem registros",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: undefined/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: aberto/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: em-andamento/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/undefined",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/baixa",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/normal",
+            "aprovado": true
+          },
+          {
+            "nome": "Filtros válidos em coleção vazia: concluido/alta",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status cancelado, prioridade undefined; coleção preenchida",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status cancelado, prioridade undefined; coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade urgente; coleção preenchida",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade urgente; coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status , prioridade undefined; coleção preenchida",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status , prioridade undefined; coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade ; coleção preenchida",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade ; coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status null, prioridade undefined; coleção preenchida",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status null, prioridade undefined; coleção vazia",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade null; coleção preenchida",
+            "aprovado": true
+          },
+          {
+            "nome": "Rejeita status undefined, prioridade null; coleção vazia",
+            "aprovado": true
+          }
+        ]
+      }
+    }
+  ],
+  "sourceHashes": {
+    "verificadores/verificar-exercicio.cjs": "2c6d5740ec9b1bdd696af20aa76667ded420f2e6b2bcaa2c4419e37e57e39c78",
+    "testes/verificador-leitor.test.cjs": "7f85a94aaf9bc5f5aca07fda087dee7bb9dbe5855994d8809710e0653e3197e6"
+  }
+}
